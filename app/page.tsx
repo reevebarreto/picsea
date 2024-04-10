@@ -14,13 +14,16 @@ export default function Home() {
 
     // Make an API request to search for the query
     try {
-      const response = await fetch(`http://13.53.39.223/search`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ query }),
-      });
+      const response = await fetch(
+        `https://picsea.reevemarcbarreto.xyz/search`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ query }),
+        }
+      );
 
       const data = await response.json();
 
