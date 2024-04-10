@@ -4,6 +4,17 @@ import { useState } from "react";
 
 type SearchResults = { index: string; image_url: string; summary: string }[];
 
+const art = `
+ ▄▄▄▄▄▄▄ ▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ 
+█       █   █       █       █       █       █
+█    ▄  █   █       █  ▄▄▄▄▄█    ▄▄▄█   ▄   █
+█   █▄█ █   █     ▄▄█ █▄▄▄▄▄█   █▄▄▄█  █▄█  █
+█    ▄▄▄█   █    █  █▄▄▄▄▄  █    ▄▄▄█       █
+█   █   █   █    █▄▄ ▄▄▄▄▄█ █   █▄▄▄█   ▄   █
+█▄▄▄█   █▄▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄█ █▄▄█
+
+`;
+
 export default function Home() {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResults>([]);
@@ -27,7 +38,7 @@ export default function Home() {
 
       const data = await response.json();
 
-      setSearchResults(data.images);
+      setSearchResults(data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -36,7 +47,7 @@ export default function Home() {
   return (
     <div className="container mx-auto px-4 py-8 ">
       <div className="flex flex-col p-4 items-center">
-        <h1 className="text-3xl font-black mb-4">Hello, Welcome to Picsea</h1>
+        <pre>{art}</pre>
         <form onSubmit={handleSubmit} className="flex gap-2">
           <input
             type="text"
@@ -56,18 +67,21 @@ export default function Home() {
 
       {/* Display search results here (conditional rendering based on results) */}
       {searchResults.length > 0 && (
-        <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-2">
-          {/* Map over searchResults and render each result */}
-          {searchResults.map((result) => (
-            <div key={result.index} className="rounded p-4">
-              <img
-                src={result.image_url}
-                alt="search result"
-                className="rounded w-full h-48 object-cover"
-              />
-              <p className="text-sm mt-2">{result.summary}</p>
-            </div>
-          ))}
+        <div className="mt-4">
+          <p>Showing top {searchResults.length} results:</p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+            {/* Map over searchResults and render each result */}
+            {searchResults.map((result) => (
+              <div key={result.index} className="rounded p-4">
+                <img
+                  src={result.image_url}
+                  alt="search result"
+                  className="rounded w-full h-48 object-cover"
+                />
+                <p className="text-sm mt-2">{result.summary}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
