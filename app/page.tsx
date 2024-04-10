@@ -14,7 +14,7 @@ export default function Home() {
 
     // Make an API request to search for the query
     try {
-      const response = await fetch(`/api/search`, {
+      const response = await fetch(`http://13.53.39.223/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
