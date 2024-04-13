@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 
-type SearchResults = { index: string; image_url: string; summary: string }[];
+type SearchResults = {
+  index: string;
+  image_url: string;
+  summary: string;
+  description?: string;
+  annotation: string;
+}[];
 
 const art = `
  ▄▄▄▄▄▄▄ ▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ 
@@ -80,10 +86,11 @@ export default function Home() {
               <div key={result.index} className="overflow-hidden mb-[2em]">
                 <img
                   src={result.image_url}
-                  alt="search result"
+                  alt={result.annotation}
+                  title={result.annotation}
                   className="w-full h-full object-cover rounded"
                 />
-                <p className="text-xs mt-1">{result.summary}</p>
+                <p className="text-xs mt-1">{result.description ?? ""}</p>
               </div>
             ))}
           </div>
