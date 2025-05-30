@@ -17,12 +17,13 @@ A prototype image search engine inspired by early systems like Google Image Sear
 - MongoDB Atlas for cloud-based NoSQL storage
 - AWS for hosting the server and frontend
 
-## 📦 Getting Started
+## Architecture
 
-### Clone the repo
-```bash
-git clone https://github.com/reeveboy/picsea.git
-cd picsea
-npm install
-npm run dev
-```
+Picsea consists of two main components:
+
+- **Frontend:** The Next.js-based user interface where users submit image search queries.
+- **Backend (picsea-server):** A Node.js and TypeScript server hosted on AWS that handles image annotation indexing and processes search queries using a custom Tf-Idf Vector Space Model.
+
+The frontend communicates with the backend via a JSON API to retrieve and display search results.
+
+For more details, visit the [picsea-server repository](https://github.com/reevebarreto/picsea-server).
